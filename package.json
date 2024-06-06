@@ -1,0 +1,19 @@
+{
+  "name": "bookcars-cypress-e2e",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "npm run cy:open || npm install && npm run cy:open",
+    "cy:open": "cypress open --e2e",
+    "cy:run": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^13.10.0"
+  },
+  "author": "benjammin4dayz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjammin4dayz/bookcars-cypress-e2e"
+  }
+}
