@@ -1,27 +1,28 @@
-## Bookcars Cypress e2e Template
+## Cypress e2e Template
 
-This template scaffolds a thoughtful project structure for writing Cypress e2e tests against multiple environments. I made it because I enjoy the challenge of building reasonable and conceptually scalable project architectures. In the process, I learned a lot about Cypress and e2e testing!
-
-It was designed with the [Bookcars App](https://github.com/aelassas/bookcars) in mind but it can surely work elsewhere.
+A thoughtful project scaffold for writing Cypress e2e tests against multiple environments. I made it because I enjoy the challenge of building reasonable and conceptually scalable project architectures. In the process, I've learned a lot about Cypress and e2e testing!
 
 Full disclaimer: I am not an e2e tester
 
-## Folder Structure
+## Project Structure
+
+At first glance, the excess number of `index.js` files is certainly questionable; especially if one is not accustomed to [barrel exports](https://flaming.codes/en/posts/barrel-files-in-javascript/). Admittedly, the added files do appear unnecessary when presented alongside the empty scaffold.
+
+However, the intent is to follow a **consistent convention**; where `cypress/support/<APP_NAME>` and each folder contained therein, is an isolated [**module**](https://www.freecodecamp.org/news/javascript-modules-explained-with-examples/). Code logic lives within its own file(s) inside the module and the sole responsibility of the index is to export the code from that module for use in other modules or tests.
+
+The advantages of this pattern will become more apparent as a project grows.
 
 ```
 ├───cypress
-│   ├───e2e
-│   │   ├───0-Core          # Smoke test and spec templates
-│   │   └───1-Bookcars      # Spec workspace
+│   ├───e2e                 # Spec Workspace
 │   ├───fixtures
 │   └───support
-│       ├───bookcars
+│       ├───__template      # App-specific workspace
 │       │   ├───env         # Resolved environment variables
 │       │   ├───pages       # Page object models
-│       │   └───scripts     # Business logic for functions used in test specs
-│       ├───commands        # Cypress command registration and logic
-│       └───global          # Global Cypress configuration
-└───cypress.env.json        # Environment configuration
+│       │   └───scripts     # App-specific logic and helpers
+│       └───global          # Cypress commands and global hooks
+└───cypress.env.json        # Environment configuration and secrets
 ```
 
 ## Getting Started
@@ -31,8 +32,8 @@ Full disclaimer: I am not an e2e tester
 1. Clone the repo
 
    ```bash
-   git clone https://github.com/benjammin4dayz/bookcars-cypress-e2e
-   cd bookcars-cypress-e2e
+   npx degit benjammin4dayz/cypress-e2e-template ez-e2e
+   cd ez-e2e
    ```
 
 2. Install dependencies
@@ -53,14 +54,57 @@ Full disclaimer: I am not an e2e tester
 
 3. Write & Run your tests
 
-### Adding New Environment Variables
+## Adding New Environment Variables
 
 1. Add the key/value to each environment in [cypress.env.json](./cypress.env.json)
-2. Define a variable to represent the value in [cypress/support/bookcars/env/config.js](./cypress/support/bookcars/env/config.js)
-3. Consume the variable in your code
-```js
-// inside the bookcars folder
-import * as env from "./env"
-// outside the bookcars folder
-import { env } from "path/to/support/bookcars"
-```
+
+2. Resolve the key if necessary
+
+3. Declare a variable to represent the value(s) in [cypress/support/\_\_template/env/config.js](./cypress/support/__template/env/config.js)
+
+4. Consume the variable in your code
+
+   ```js
+   // reference the env module INSIDE cypress/support/<APP_NAME>
+   // e.g. when writing site-specific scripts or functions
+   import * as env from "./env";
+
+   // --- or ---
+
+   // reference the env module outside cypress/support/<APP_NAME>
+   // e.g. directly in test specs
+   import { env } from "cypress/support/<APP_NAME>";
+   ```
+
+   You might be thinking,
+
+   - "..b-but why not use them directly? Why another file and variable?"
+
+     After creating or changing a key inside `cypress.env.json`, you only need to edit a **single source** to resolve, declare, process, and export the finalized value. As a result, consumers receive consistently structured data that is immediately ready to use.
+
+## Adding New Pages
+
+This template loosely follows a [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/)
+
+1. Create a new page in [cypress/support/<APP_NAME>/pages](./cypress/support/__template/pages/Main.js)
+
+2. Use the `PageHelper` [utility class](./cypress/support/__template/pages/util.js) to create a new page.
+
+   1. Instantiate `PageHelper` with the app's base URL
+
+      ```js
+      import * as env from "../env";
+      import { PageHelper } from "./util";
+
+      const page = new PageHelper(env.APP_URL);
+      ```
+
+   2. Design your page object model
+
+      ```js
+      export class Main {
+        static HomePage = page.create("/", {
+          header: "body > div > h1",
+        });
+      }
+      ```

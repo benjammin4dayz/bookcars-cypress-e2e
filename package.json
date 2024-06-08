@@ -1,6 +1,6 @@
 {
-  "name": "bookcars-cypress-e2e",
-  "version": "0.1.0",
+  "name": "cypress-e2e-template",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "start": "npm run cy:open || npm install && npm run cy:open",
@@ -14,6 +14,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/benjammin4dayz/bookcars-cypress-e2e"
+    "url": "https://github.com/benjammin4dayz/cypress-e2e-template"
   }
 }

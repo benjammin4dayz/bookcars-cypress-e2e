@@ -9,11 +9,11 @@ export class PageHelper {
 
   /**
    * @param {String} route The route, excluding the base url. e.g. `/sign-in`, `/settings`
-   * @param {{[key: string]: string}} elements Page object model which has an arbitrary number of key-value pairs, where the key is a string and the value is a string
+   * @param {{[key: string]: string}} elements Page object model with an arbitrary number of key-value pairs, where both key and value are strings
    */
   create(route, elements = {}) {
     return {
-      url: this.baseUrl + route,
+      url: new URL(route, this.baseUrl).href,
       elements: elements,
     };
   }
