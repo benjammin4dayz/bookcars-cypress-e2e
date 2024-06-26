@@ -1,6 +1,6 @@
 // resolve keys for the active environment specified in cypress.env.json
-const APP = __env__("app");
-const CREDENTIALS = __env__("credentials");
+const APP = __env__('app');
+const CREDENTIALS = __env__('credentials');
 
 // construct and validate the URL before passing it to consumers
 const endpoint = new URL(APP.url);
@@ -21,7 +21,7 @@ export const PASSWORD = CREDENTIALS.password;
 
 /** @param {string} key */
 export function __env__(key) {
-  const activeEnv = Cypress.env("__active_env");
+  const activeEnv = Cypress.env('__active_env');
   try {
     return Cypress.env(activeEnv)[key];
   } catch (e) {

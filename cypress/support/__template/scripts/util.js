@@ -1,5 +1,3 @@
-export const TEST = "Hello world!";
-
 /**
  * Enters the username, password, and clicks the submit button.
  * Then it saves the credentials in a session. Pretty straightforward.

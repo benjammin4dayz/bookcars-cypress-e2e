@@ -1,5 +1,5 @@
 {
-    "typeAcquisition": {
-        "include": ["node_modules/cypress/types"]
-    },
+  "typeAcquisition": {
+    "include": ["node_modules/cypress/types"]
+  }
 }

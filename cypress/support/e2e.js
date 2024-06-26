@@ -14,4 +14,4 @@
 // ***********************************************************
 
 // Import using ES2015 syntax:
-import "./global";
+import './global';
