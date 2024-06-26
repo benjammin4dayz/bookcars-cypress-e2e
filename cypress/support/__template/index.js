@@ -1,3 +1,3 @@
-export * as env from "./env";
+export * as env from "./env.config";
 export * from "./pages";
 export * from "./scripts";
