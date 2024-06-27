@@ -1,6 +1,10 @@
 import { env } from '../support/__template';
 
 describe('Template Environment Variables', () => {
+  before(() => {
+    cy.hello('World');
+  });
+
   it('App URL is valid', () => {
     expect(env.APP_URL).to.be.a('string');
     expect(env.APP_URL).to.not.be.empty;
