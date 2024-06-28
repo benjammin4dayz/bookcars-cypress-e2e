@@ -24,6 +24,7 @@
   },
   "author": "benjammin4dayz",
   "license": "MIT",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/benjammin4dayz/cypress-e2e-template"
