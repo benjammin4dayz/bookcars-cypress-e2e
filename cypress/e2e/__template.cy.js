@@ -1,4 +1,4 @@
-import { env } from '../support/__template';
+import { env, Home } from '../support/__template';
 
 describe('Template', () => {
   before(() => {
@@ -6,14 +6,13 @@ describe('Template', () => {
   });
 
   it('App URL is valid', () => {
-    expect(env.APP_URL).to.be.a('string');
-    expect(env.APP_URL).to.not.be.empty;
+    expect(Home.url).to.be.a('string').and.not.empty;
   });
 
   it('App URL returns a 200 status', () => {
-    cy.request(env.APP_URL).then(response => {
+    cy.request(Home.url).then(response => {
       expect(response.status).to.eq(200);
-      cy.visit(env.APP_URL);
+      Home.visit();
     });
   });
 
