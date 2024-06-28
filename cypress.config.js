@@ -7,7 +7,7 @@ export default defineConfig({
     experimentalInteractiveRunEvents: true,
     setupNodeEvents(on, config) {
       // implement node event listeners here
-      linter(on, config, { strict: false });
+      linter(on, config, { pauseOnError: true, pauseDuration: 5000 });
     },
   },
 });
