@@ -1,6 +1,6 @@
 /**
  * Enters the username, password, and clicks the submit button.
- * Then it saves the credentials in a session. Pretty straightforward.
+ * Then it saves the credentials in a session.
  * @param {object} loginOptions - The login options object
  * @param {string} loginOptions.username - The username or email to log in with
  * @param {string} loginOptions.password - The password to log in with
