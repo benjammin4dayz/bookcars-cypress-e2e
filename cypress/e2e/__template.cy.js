@@ -24,11 +24,12 @@ describe('Template', () => {
   it('Expected elements exist', () => {
     Home.visit();
 
-    const { header, description, moreInformation } = Home.elements;
+    Home.elements.header
+      .should('exist')
+      .and('be.visible')
+      .and('have.text', 'Example Domain');
 
-    header.should('exist').and('be.visible').and('have.text', 'Example Domain');
-
-    description
+    Home.elements.description
       .should('exist')
       .and('be.visible')
       .and(
@@ -36,7 +37,7 @@ describe('Template', () => {
         'This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.'
       );
 
-    moreInformation
+    Home.elements.moreInformation
       .should('exist')
       .and('be.visible')
       .and('have.text', 'More information...')
